@@ -94,8 +94,8 @@ void UMyGameInstance::JoinServer()
 	SessionSearch = MakeShareable(new FOnlineSessionSearch());
 
 	SessionSearch->bIsLanQuery = (IOnlineSubsystem::Get()->GetSubsystemName() != "NULL") ? false : true;
-	SessionSearch->MaxSearchResults = 1000;
-	SessionSearch->QuerySettings.Set("SEARCH_PRESENCE", false, EOnlineComparisonOp::Equals);
+	SessionSearch->MaxSearchResults = 20000;
+	SessionSearch->QuerySettings.Set("SEARCH_PRESENCE", true, EOnlineComparisonOp::Equals);
 	//SessionSearch->QuerySettings.Set("SEARCH_KEYWORDS", FString::FString("SteamExpirement Session"), EOnlineComparisonOp::Equals);
 
 	SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());

@@ -12,3 +12,6 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
+Plugins/*/Binaries/*
+Plugins/*/Intermediate/*
+unreal_launcher.bat
