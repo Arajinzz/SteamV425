@@ -106,7 +106,7 @@ void UMyGameInstance::JoinServer()
 
 	SessionSearch->bIsLanQuery = false;
 	SessionSearch->MaxSearchResults = 20000;
-	SessionSearch->QuerySettings.Set(FName("GAMENAME"), FString("This is my game"), EOnlineComparisonOp::Equals);
+	SessionSearch->QuerySettings.Set(FName("GAMENAME"), FString("This is my game name"), EOnlineComparisonOp::Equals);
 	SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
 	//SessionSearch->QuerySettings.Set("SEARCH_KEYWORDS", FString::FString("SteamExpirement Session"), EOnlineComparisonOp::Equals);
 
