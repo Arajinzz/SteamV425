@@ -8,7 +8,11 @@ public class SteamV425 : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "OnlineSubsystem", "OnlineSubsystemNull", "OnlineSubsystemSteam", "OnlineSubsystemUtils" });
+		PublicDependencyModuleNames.AddRange(new string[] {
+			"Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "OnlineSubsystem",
+			"OnlineSubsystemNull", "OnlineSubsystemSteam", "OnlineSubsystemUtils", "AdvancedSessions",
+			"AdvancedSteamSessions"
+		});
 
 	}
 }
