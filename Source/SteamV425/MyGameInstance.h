@@ -23,6 +23,11 @@ public:
 
 protected:
 	TSharedPtr<FOnlineSessionSearch> SessionSearch;
+	
+	// Object to track search results
+	TSharedPtr<FOnlineSessionSearch> SearchObject;
+
+	FString GameName = "This is my game name";
 
 	IOnlineSessionPtr SessionInterface;
 

@@ -81,21 +81,33 @@ void UMyGameInstance::CreateServer()
 
 	SessionSettings.bAllowJoinInProgress = true;
 	SessionSettings.bIsDedicated = false;
-	SessionSettings.bIsLANMatch = (IOnlineSubsystem::Get()->GetSubsystemName() != "NULL") ? false : true;
+	SessionSettings.bIsLANMatch = false;
 	SessionSettings.bShouldAdvertise = true;
 	SessionSettings.bUsesPresence = true;
-	SessionSettings.NumPublicConnections = 5;
+	SessionSettings.NumPublicConnections = 100;
+	SessionSettings.bAllowJoinViaPresence = true;
+	SessionSettings.bAllowInvites = true;
+	SessionSettings.bAllowJoinViaPresenceFriendsOnly = false;
+	SessionSettings.bAntiCheatProtected = false;
+	SessionSettings.bUsesStats = false;
 
-	SessionInterface->CreateSession(0, FName("SteamExpirement Session"), SessionSettings);
+	FOnlineSessionSetting ExtraSetting;
+	ExtraSetting.Data = GameName;
+	//	ViaOnlineServiceAndPing
+	ExtraSetting.AdvertisementType = EOnlineDataAdvertisementType::ViaOnlineService;
+	SessionSettings.Settings.Add("GAMENAME", ExtraSetting);
+
+	SessionInterface->CreateSession(0, NAME_GameSession, SessionSettings);
 }
 
 void UMyGameInstance::JoinServer()
 {
 	SessionSearch = MakeShareable(new FOnlineSessionSearch());
 
-	SessionSearch->bIsLanQuery = (IOnlineSubsystem::Get()->GetSubsystemName() != "NULL") ? false : true;
+	SessionSearch->bIsLanQuery = false;
 	SessionSearch->MaxSearchResults = 20000;
-	SessionSearch->QuerySettings.Set("SEARCH_PRESENCE", true, EOnlineComparisonOp::Equals);
+	SessionSearch->QuerySettings.Set(FName("GAMENAME"), FString("This is my game"), EOnlineComparisonOp::Equals);
+	SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
 	//SessionSearch->QuerySettings.Set("SEARCH_KEYWORDS", FString::FString("SteamExpirement Session"), EOnlineComparisonOp::Equals);
 
 	SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());
